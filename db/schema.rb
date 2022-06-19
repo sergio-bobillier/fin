@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_19_164417) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_19_165935) do
+  create_table "expense_details", force: :cascade do |t|
+    t.integer "expense_id", null: false
+    t.string "subject", null: false
+    t.decimal "amount", null: false
+    t.index ["expense_id"], name: "index_expense_details_on_expense_id"
+  end
+
   create_table "expenses", force: :cascade do |t|
     t.date "date", null: false
     t.string "place"
@@ -20,4 +27,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_19_164417) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "expense_details", "expenses"
 end
